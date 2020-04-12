@@ -1,6 +1,6 @@
 ﻿namespace AlgoLib.Model
 {
-    public enum HeapType
+    public enum HeapType: byte
     {
         MaxHeap = 0,
         MinHeap = 1

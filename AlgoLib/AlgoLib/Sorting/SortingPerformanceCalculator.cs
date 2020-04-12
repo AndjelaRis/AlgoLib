@@ -37,8 +37,8 @@ namespace AlgoLib.Sorting
 
         public static void PrintSortingReport(PerformanceReport Report)
         {
-           foreach (int singleNumber in (int[])Report.Result)
-                Console.Write("{0}\t", singleNumber);
+           //foreach (int singleNumber in (int[])Report.Result)
+                //Console.Write("{0}\t", singleNumber);
             Console.WriteLine("Elapsed time: {0}\n", Report.ElapsedTime.TotalMilliseconds);
         }
 
@@ -53,24 +53,28 @@ namespace AlgoLib.Sorting
             
             Console.WriteLine("Insertion Sort");
             SortingPerformanceCalculator.PrintSortingReport(SortingPerformanceCalculator
-                .CalculateSortingPerformance(SortingController.SelectionSort, UnorderedArray, Direction));
+                .CalculateSortingPerformance(SortingController.InsertionSort, UnorderedArray, Direction));
 
             Console.WriteLine("Selection Sort");
             SortingPerformanceCalculator.PrintSortingReport(SortingPerformanceCalculator
-                .CalculateSortingPerformance(SortingController.HeapSort, UnorderedArray, Direction));
+                .CalculateSortingPerformance(SortingController.SelectionSort, UnorderedArray, Direction));
 
             Console.WriteLine("Bubble Sort");
             SortingPerformanceCalculator.PrintSortingReport(SortingPerformanceCalculator
-                .CalculateSortingPerformance(SortingController.CountingSort, UnorderedArray, UpperLimit, Direction));
+                .CalculateSortingPerformance(SortingController.BubbleSort, UnorderedArray, Direction));
         }
 
         public static void TempTestForNElements(int N, SortDirection Direction)
         {
             int[] UnorderedArray = SortingPerformanceCalculator.GenerateRandomArray(LowerLimit, UpperLimit, N);
 
-            Console.WriteLine("Counting sort");
+            Console.WriteLine("Insertion sort");
             SortingPerformanceCalculator.PrintSortingReport(SortingPerformanceCalculator
-                .CalculateSortingPerformance(SortingController.CountingSort, UnorderedArray, UpperLimit, Direction));
+                .CalculateSortingPerformance(SortingController.InsertionSort, UnorderedArray, Direction));
+
+            Console.WriteLine("Heap sort");
+            SortingPerformanceCalculator.PrintSortingReport(SortingPerformanceCalculator
+                .CalculateSortingPerformance(SortingController.HeapSort, UnorderedArray, Direction));
 
             Console.WriteLine("Radix sort");
             SortingPerformanceCalculator.PrintSortingReport(SortingPerformanceCalculator
