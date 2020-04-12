@@ -12,12 +12,13 @@ namespace TestProject
         {
             string text = @"E:\text10words.txt";
             string pattern = @"E:\pattern.txt";
-            string fileOfIndexes = @"E:\fileOfIndexes.txt";
+            //string fileOfIndexes= @"E:\fileOfIndexes.txt";
+            string sameCodeWords = @"E:\sameCodeWords.txt";
             //int primeNumber = 73;
             //int numOfChar = 256;
             //SearchAlgorithams.RabinKarp_Match(text, pattern, fileOfIndexes, numOfChar, primeNumber);
             //SearchAlgorithams.KnuthMorrisPratt_Match(text, pattern, fileOfIndexes);
-            SearchAlgorithms.SoundEx(text, pattern, fileOfIndexes);
+            SearchAlgorithams.SoundEx(text, pattern, sameCodeWords);
 
 
             //TestForBasicAlgorithms();

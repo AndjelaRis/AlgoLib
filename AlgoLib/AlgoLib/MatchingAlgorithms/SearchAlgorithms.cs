@@ -104,12 +104,28 @@ namespace AlgoLib.MatchingAlgorithams
         {
             string Text = ReadFile(text);
             string Pattern = ReadFile(pattern);
-
-
             string patternCode = GetSoundExCode(Pattern);
-            string textCode = GetSoundExCode(Text);
-            Console.WriteLine(patternCode);
 
+            if (File.Exists(sameCodeWords))
+                File.Delete(sameCodeWords);
+
+
+            char[] separator = { ' ', '.', ',', '?', '!', '"', ':', ';', '\n', '\t', '\r', '_', '-' };
+            string[] textStrings = Text.Split(separator);
+
+            for (int i = 0; i < textStrings.Length; i++)
+            {
+                string textCode;
+
+                if (string.Compare(string.Empty, textStrings[i]) != 0)
+                {
+                    textCode = GetSoundExCode(textStrings[i]);
+                    if (string.Compare(patternCode, textCode) == 0)
+                    {
+                        WriteInFile(sameCodeWords, textStrings[i]);
+                    }
+                }
+            }
         }
 
         public static void Lavenshtein()
@@ -226,37 +242,28 @@ namespace AlgoLib.MatchingAlgorithams
         public static string GetSoundExCode(string text)
         {
             string textUpper = text.ToUpper();
-            string textCode = "";
-            textCode += textUpper[0];
-            int patternNumOfDig = 1, i;
+            int textLength = textUpper.Length;
+            StringBuilder textCode = new StringBuilder("");
+            textCode.Append(textUpper[0]);
+            int i;
 
-            char[] notNeedLetters = { 'A', 'E', 'I', 'O', 'U', 'H', 'W', 'Y' };
-            char[] oneLetters = { 'B', 'F', 'P', 'V' };
-            char[] twoLetters = { 'C', 'G', 'J', 'K', 'Q', 'S', 'X', 'Z' };
-            char[] threeLetters = { 'D', 'T' };
-            char[] fiveLetters = { 'M', 'N' };
-            for (i = 0; i < notNeedLetters.Length; i++)
+            for (i = 1; i < textLength; i++)
             {
-                textUpper = String.Concat(textUpper.Split(notNeedLetters[i]));
+                string encodedChar = EncodeChar(textUpper[i]);
+                if (encodedChar != "0" && encodedChar != EncodeChar(textUpper[i - 1]))
+                    textCode.Append(encodedChar);
+
+                //(i+1)<textUpper.Length
+                // && EncodeChar(textUpper[i])== EncodeChar(textUpper[i-1])
+                // && textUpper[i - 1] != 'H' && textUpper[i + 1] != 'W'
             }
 
-            for (i = 1; i < textUpper.Length; i++)
-            {
-                int j;
-                for (j = 0; j < oneLetters.Length; j++)
-                {
-                    if (textUpper[i] == oneLetters[j])
-                    {
-                        textCode += "1";
-                    }
-                }
+            if (textCode.Length >= 4)
+                textCode.Length = 4;
+            else
+                textCode.Append(new string('0', 4 - textCode.Length));
 
-               // for ()
-
-
-            }
-
-            return textUpper;
+            return textCode.ToString();
         }
 
         #endregion
