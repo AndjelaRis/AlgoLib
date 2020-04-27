@@ -1,4 +1,4 @@
-﻿using AlgoLib.GreedyAlgorithms.ShannonFano;
+using AlgoLib.GreedyAlgorithms.ShannonFano;
 
 namespace TestProject
 {
