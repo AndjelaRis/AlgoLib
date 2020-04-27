@@ -1,54 +1,21 @@
-﻿using AlgoLib.Sorting;
-using AlgoLib.MatchingAlgorithms;
+﻿using AlgoLib.GreedyAlgorithms.ShannonFano;
 
 namespace TestProject
 {
     class Program
     {
-        //Ostala je implementacija:
-        //Bucket
-        //Radix
-        static void Main(string[] args)
+       static void Main(string[] args)
         {
-            string text = @"E:\text10words.txt";
-            string pattern = @"E:\pattern.txt";
-            string fileOfIndexes = @"E:\fileOfIndexes.txt";
-            //int primeNumber = 73;
-            //int numOfChar = 256;
-            //SearchAlgorithams.RabinKarp_Match(text, pattern, fileOfIndexes, numOfChar, primeNumber);
-            //SearchAlgorithams.KnuthMorrisPratt_Match(text, pattern, fileOfIndexes);
-            SearchAlgorithms.SoundEx(text, pattern, fileOfIndexes);
-
-
-            //TestForBasicAlgorithms();
-            //SortingPerformanceCalculator.TempTestForNElements(10, SortDirection.Increasing);
-            TempTestForAll();
+            /*HuffmanService service = new HuffmanService();
+            HuffmanTree tree = new HuffmanTree();
+            tree.Build(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Apology Plato.txt");
+            tree.Encode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Apology Plato.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Encoded.txt");
+            tree.Decode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Encoded.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Decoded.txt");*/
+            //LZWService lZWService = new LZWService();
+            //lZWService.Encode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Anatomy.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Encoded.txt");
+            //lZWService.Decode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Encoded.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Decoded.txt");
+            ShannonFannoTree tree = new ShannonFannoTree();
+            tree.BuildTree(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Test.txt");
         }
-
-        #region Test cases
-
-        public static void TempTestForAll()
-        {
-            SortingPerformanceCalculator.TempTestForNElements(10, SortDirection.Increasing);
-            //SortingPerformanceCalculator.TestBasicForNElements(10, SortDirection.Increasing);
-            SortingPerformanceCalculator.TempTestForNElements(100, SortDirection.Increasing);
-            SortingPerformanceCalculator.TempTestForNElements(1000, SortDirection.Increasing);
-            SortingPerformanceCalculator.TempTestForNElements(10000, SortDirection.Increasing);
-            SortingPerformanceCalculator.TempTestForNElements(100000, SortDirection.Increasing);
-            SortingPerformanceCalculator.TempTestForNElements(1000000, SortDirection.Increasing);
-        }
-
-        public static void TestForBasicAlgorithms()
-        {
-            SortingPerformanceCalculator.TestBasicForNElements(100, SortDirection.Increasing);
-
-            SortingPerformanceCalculator.TestBasicForNElements(1000, SortDirection.Increasing);
-
-            SortingPerformanceCalculator.TestBasicForNElements(10000, SortDirection.Increasing);
-
-            SortingPerformanceCalculator.TestBasicForNElements(100000, SortDirection.Increasing);
-        }
-
-        #endregion
     }
 }
