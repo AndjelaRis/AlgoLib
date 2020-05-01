@@ -12,35 +12,28 @@ namespace AlgoLib.GreedyAlgorithms
         public List<bool> Traverse(char symbol, List<bool> data)
         {
             if (Right == null && Left == null)
-            {
                 if (symbol.Equals(this.Symbol))
                     return data;
                 else
                     return null;
-            }
+            List<bool> left = null;
+            List<bool> right = null;
+            if (Left != null)
+                left = Left.Traverse(symbol, GetSubList(data, false));
+            if (Right != null)
+                right = Right.Traverse(symbol, GetSubList(data, true));
+            if (left != null)
+                return left;
             else
-            {
-                List<bool> left = null;
-                List<bool> right = null;
-                if (Left != null)
-                {
-                    List<bool> leftPath = new List<bool>();
-                    leftPath.AddRange(data);
-                    leftPath.Add(false);
-                    left = Left.Traverse(symbol, leftPath);
-                }
-                if (Right != null)
-                {
-                    List<bool> rightPath = new List<bool>();
-                    rightPath.AddRange(data);
-                    rightPath.Add(true);
-                    right = Right.Traverse(symbol, rightPath);
-                }
-                if (left != null)
-                    return left;
-                else
-                    return right;
-            }
+                return right;
+        }
+
+        public List<bool> GetSubList(List<bool> currentData, bool nextStep)
+        {
+            List<bool> rightPath = new List<bool>();
+            rightPath.AddRange(currentData);
+            rightPath.Add(nextStep);
+            return rightPath;
         }
 
         public bool IsLeaf() => (Left == null && Right == null);
