@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AlgoLib.Heaps.Fibonacci
 {
@@ -9,10 +8,16 @@ namespace AlgoLib.Heaps.Fibonacci
         public FibonacciNode RootList { get; private set; }
         public FibonacciNode MinNode { get; private set; }
 
+        public FibonacciHeap()
+        {
+            RootList = MinNode = null;
+            numOfNodes = 0;
+        }
+
         public List<FibonacciNode> Iterate(FibonacciNode head)
         {
             if (head == null)
-                return null;
+                return new List<FibonacciNode>();
             List<FibonacciNode> iteratedNodes = new List<FibonacciNode>();
             FibonacciNode currentNode, endNode;
             currentNode = endNode = head;
@@ -50,7 +55,7 @@ namespace AlgoLib.Heaps.Fibonacci
             return currentMin;
         }
 
-        public void Insert(int newKey)
+        public FibonacciNode Insert(int newKey)
         {
             FibonacciNode newNode = new FibonacciNode(newKey);
             newNode.Left = newNode.Right = newNode;
@@ -58,6 +63,13 @@ namespace AlgoLib.Heaps.Fibonacci
             if (MinNode == null || newNode.Key < MinNode.Key)
                 MinNode = newNode;
             numOfNodes++;
+            return newNode;
+        }
+
+        public void Delete(FibonacciNode nodeToDelete)
+        {
+            DecreaseKey(nodeToDelete, int.MinValue);
+            ExtractMin();
         }
 
         public void DecreaseKey(FibonacciNode nodeToChange, int key)
@@ -65,10 +77,11 @@ namespace AlgoLib.Heaps.Fibonacci
             if (key > nodeToChange.Key)
                 return;
             nodeToChange.Key = key;
-            if(nodeToChange.Parent != null && nodeToChange.Key < nodeToChange.Parent.Key)
+            FibonacciNode parent = nodeToChange.Parent;
+            if(parent != null && nodeToChange.Key < parent.Key)
             {
-                Cut(nodeToChange, nodeToChange.Parent);
-                CascadeCut(nodeToChange.Parent);
+                Cut(nodeToChange, parent);
+                CascadeCut(parent);
             }
             if (nodeToChange.Key < MinNode.Key)
                 MinNode = nodeToChange;
@@ -81,7 +94,7 @@ namespace AlgoLib.Heaps.Fibonacci
             newHeap.MinNode = MinNode;
             FibonacciNode lastNode = heapToMerge.RootList.Left;
             heapToMerge.RootList.Left = newHeap.RootList.Left;
-            newHeap.RootList.Right = heapToMerge.RootList;
+            newHeap.RootList.Left.Right = heapToMerge.RootList;
             newHeap.RootList.Left = lastNode;
             newHeap.RootList.Left.Right = newHeap.RootList;
             if (heapToMerge.MinNode.Key < newHeap.MinNode.Key)
@@ -157,11 +170,11 @@ namespace AlgoLib.Heaps.Fibonacci
                 return;
             if (parentNode.IsMarked)
             {
-                Cut(parentNode, currentNode);
-                CascadeCut(currentNode);
+                Cut(currentNode, parentNode);
+                CascadeCut(parentNode);
             }
             else
-                parentNode.IsMarked = true;
+                currentNode.IsMarked = true;
         }
 
         private void RemoveFromChildList(FibonacciNode parentNode, FibonacciNode childNode)

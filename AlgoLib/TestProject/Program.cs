@@ -1,4 +1,7 @@
-using AlgoLib.GreedyAlgorithms.ShannonFano;
+using AlgoLib.Heaps.Fibonacci;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TestProject
 {
@@ -6,16 +9,13 @@ namespace TestProject
     {
        static void Main(string[] args)
         {
-            /*HuffmanService service = new HuffmanService();
-            HuffmanTree tree = new HuffmanTree();
-            tree.Build(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Apology Plato.txt");
-            tree.Encode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Apology Plato.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Encoded.txt");
-            tree.Decode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Encoded.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Decoded.txt");*/
-            //LZWService lZWService = new LZWService();
-            //lZWService.Encode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Anatomy.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Encoded.txt");
-            //lZWService.Decode(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Encoded.txt", @"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\LZW\Decoded.txt");
-            ShannonFannoTree tree = new ShannonFannoTree();
-            tree.BuildTree(@"D:\Projects\AlgoLib\AlgoLib\AlgoLib\GreedyAlgorithms\Huffman\Test.txt");
+            FibonacciReportEngine engine = new FibonacciReportEngine(0, 10000);
+
+            engine.TestAllForHeapOfN(10);
+            engine.TestAllForHeapOfN(100);
+            engine.TestAllForHeapOfN(1000);
+            engine.TestAllForHeapOfN(10000);
+            engine.TestAllForHeapOfN(100000);
         }
     }
 }
